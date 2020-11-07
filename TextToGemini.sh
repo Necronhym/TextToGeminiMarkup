@@ -26,6 +26,15 @@ do
 		GETLINES=($GETLINES+1)	
 		if [ `expr $CURRENT_LINE + $GETLINES` -gt $LINES ]
 		then
+			#WRITE TO FILE:
+			PAGENUMBER=`expr $PAGENUMBER+1`
+			NEXTPAGE=`expr $PAGENUMBER+1` 
+			PREVIOUSPAGE=`expr $PAGENUMBER-1`
+			#Page Number:
+			echo -e "\n##Page $PAGENUMBER \n" >> $DIR/$PAGENUMBER"_Page.gmi"
+			echo "$STRING" >> $DIR/$PAGENUMBER"_Page.gmi"
+			#Add navigation links:
+			echo -e "=>\n${PREVIOUSPAGE}_Page.gmi Previous page" >> $DIR/$PAGENUMBER"_Page.gmi"
 			break;
 		fi
 		GETLINES=`expr $GETLINES+1`;
